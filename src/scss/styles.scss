@@ -33,3 +33,14 @@
         } 
     } 
 }
+
+.loading-modal {
+    .modal-content {
+        background: transparent;
+        border: 0;
+    }
+    
+}
+.loading-backdrop {
+    background-color: $white;
+}

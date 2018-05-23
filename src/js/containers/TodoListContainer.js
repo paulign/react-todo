@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TodoList from '../components/TodoList';
+import Loading from '../components/Loading';
 import { getAllTodosRequest, updateTodoRequest, deleteTodoRequest  } from '../actions';
 
 class TodoListContainer extends Component {
@@ -13,7 +14,10 @@ class TodoListContainer extends Component {
         let { todos } = this.props;
 
         return (
-            <TodoList {...this.props} />
+            <div>
+                <TodoList {...this.props} />
+                <Loading isLoading={todos.isFetching}/>
+            </div>
         );
     }
 }
