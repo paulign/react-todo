@@ -1,0 +1,35 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "./variables";
+@import "~bootstrap/scss/bootstrap";
+@import "../font-awesome/scss/fontawesome.scss";
+@import "../font-awesome/scss/fa-brands.scss";
+@import "../font-awesome/scss/fa-solid.scss";
+@import "../font-awesome/scss/fa-regular.scss";
+
+.todo-item {
+    position: relative;
+    padding-right: 40px;
+    .todo-actions {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: none;
+    }
+    @include hover-focus {
+        .todo-actions {
+            display: block;
+        }
+    }
+    .todo-text {
+        font-weight: bold;
+    }
+    
+    &.completed {
+        .todo-text {
+            text-decoration: line-through;
+            color: $gray-500;
+        } 
+    } 
+}
