@@ -62,7 +62,7 @@ const sassLoader = [
 const imageFileLoader = [{
     loader: 'file-loader',
     options: {
-        name: isProduction ? '[path][name].[ext]' : '[path][name][hash].[ext]',
+        name: isProduction ? 'img/[name].[ext]' : 'img/[name][hash].[ext]',
         publicPath: isProduction ? distPath : '/'
     }
 }];
