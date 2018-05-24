@@ -18,7 +18,11 @@ class Loading extends Component {
                 isOpen={isLoading}
                 centered={true}
                 backdropClassName={'loading-backdrop'}
-                modalClassName={"loading-modal"}>
+                modalClassName={"loading-modal"}
+                modalTransition={{
+                    timeout: 10,
+                    appear: false,
+                }}>
                 <ModalBody>
                     <div className="text-center">
                         <img src={spinner} />
