@@ -24,7 +24,7 @@
     "start": "webpack-dev-server --mode development --hot --colors --progress",
     "prebuild": "rimraf build",
     "build": "webpack --mode production --colors --progress",
-    "oostdeploy": "npm run build",
+    "heroku-postbuild": "npm run build",
     "deploy": "node deploy.js"
   },
   "devDependencies": {
