@@ -5,6 +5,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.1.1",
+    "express": "^4.16.3",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.3",
@@ -21,7 +22,10 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --hot --colors --progress",
-    "build": "webpack --mode production --colors --progress"
+    "prebuild": "rimraf build",
+    "build": "webpack --mode production --colors --progress",
+    "predeploy": "npm run build",
+    "deploy": "node deploy.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
