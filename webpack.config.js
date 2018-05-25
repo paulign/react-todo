@@ -62,10 +62,12 @@ const sassLoader = [
 const imageFileLoader = [{
     loader: 'file-loader',
     options: {
-        name: isProduction ? 'img/[name].[ext]' : 'img/[name][hash].[ext]',
-        publicPath: isProduction ? distPath : '/'
+        name: isProduction ? '/img/[name].[ext]' : '/img/[name][hash].[ext]',
+        // publicPath: isProduction ? distPath : '/'
     }
 }];
+
+console.log(distPath);
 
 const optimizeImageLoader = [{
     loader: 'image-webpack-loader',
