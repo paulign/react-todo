@@ -19,8 +19,6 @@ class TodoList extends Component {
     renderTodos = () => {
         let { todos, updateTodo, deleteTodo } = this.props;
 
-        console.log(todos.items);
-
         return (
             <ul>
                 {todos ? todos.items.map(todo =>
@@ -38,7 +36,6 @@ class TodoList extends Component {
     render() {
         let { todos } = this.props;
 
-        console.log(todos);
         return todos && todos.items.length ? this.renderTodos() : this.renderNoItems();
         
     }

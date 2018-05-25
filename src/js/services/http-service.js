@@ -10,7 +10,6 @@ export const apiRequest = async (url, method = 'GET', body = null, contentType =
         responseStatus = response.status;
 
         let data = await (response.json());
-        console.log(data);
 
         if (response.status === 200) {
             return data;

@@ -12,8 +12,7 @@ class Loading extends Component {
 
     render() {
         let { isLoading } = this.props;
-        console.log('isLoading ', isLoading);
-        console.log(spinner);
+        
         return (
             <Modal
                 isOpen={isLoading}

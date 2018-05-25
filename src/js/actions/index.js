@@ -57,7 +57,6 @@ export const getAllTodosRequest = () => {
     try {
       dispatch(getAllTodos());
       let data = await apiRequest('todos');
-      console.log(data);
       return dispatch(receiveTodos(data));
 
     } catch (error) {
@@ -70,19 +69,16 @@ export const getAllTodosRequest = () => {
 export const addTodoRequest = (todo) => {
   return async (dispatch, getState) => {
     try {
-      console.log(todo);
       dispatch(addTodo(todo));
       let body = JSON.stringify(todo);
-      console.log(body);
       let data = await apiRequest('todos', 'POST', body);
-      console.log(data);
       let { todos } = getState();
       todos.items.push(data);
       dispatch(showAlertWithTimeout('Todo was successfully added!'));
       return dispatch(receiveTodos(todos.items));
 
     } catch (error) {
-      dispatch(showAlertWithTimeout(error.message));
+      dispatch(showAlertWithTimeout(error.message, true));
       return dispatch(receiveError(error.message));
     }
   }
@@ -91,19 +87,18 @@ export const addTodoRequest = (todo) => {
 export const updateTodoRequest = (todo) => {
   return async (dispatch, getState) => {
     try {
-      console.log(todo);
       dispatch(updateTodo(todo));
       let body = JSON.stringify(todo);
-      console.log(body);
       let data = await apiRequest('todos/' + todo.id, 'PUT', body);
-      console.log(data);
       let { todos } = getState();
       let index = todos.items.findIndex((item) => item.id == data.id);
 
       todos.items[index] = data;
+      dispatch(showAlertWithTimeout('Todo was successfully updated!'));
       return dispatch(receiveTodos(todos.items));
 
     } catch (error) {
+      dispatch(showAlertWithTimeout(error.message, true));
       return dispatch(receiveError(error.message));
     }
   }
@@ -112,28 +107,29 @@ export const updateTodoRequest = (todo) => {
 export const deleteTodoRequest = (todo) => {
   return async (dispatch, getState) => {
     try {
-      console.log(todo);
       dispatch(deleteTodo(todo));
       let body = JSON.stringify(todo);
-      console.log(body);
       let data = await apiRequest('todos/' + todo.id, 'DELETE', body);
-      console.log(data);
       let { todos } = getState();
       let index = todos.items.findIndex((item) => item.id == todo.id);
 
       todos.items.splice(index, 1);
+      dispatch(showAlertWithTimeout('Todo was successfully deleted!'));
       return dispatch(receiveTodos(todos.items));
 
     } catch (error) {
+      dispatch(showAlertWithTimeout(error.message, true));
       return dispatch(receiveError(error.message));
     }
   }
 }
 
-export const showAlert = (message, error = false) => {
+let alertID = 0;
+export const showAlert = (message, id, error = false) => {
   return {
     type: error ? SHOW_ERROR_ALERT : SHOW_SUCCEESS_ALERT,
     message,
+    id,
     error
   }
 }
@@ -141,11 +137,15 @@ export const showAlert = (message, error = false) => {
 export const showAlertWithTimeout = (message, error) => {
   return async (dispatch, getState) => {
     try {
-      console.log(message, error);
-      dispatch(showAlert(message, error));
-      const timeout = () => {
-        if (getState().alert.message) {
+      let nextAlertId = alertID++;
+      
+      dispatch(showAlert(message, nextAlertId, error));
+      let timeout = () => {
+        if (getState().alert.message && getState().alert.id == nextAlertId) {
           return dispatch(hideAlert());
+        }
+        else {
+          clearTimeout(timeout);
         }
       }
       setTimeout(timeout, 5000);

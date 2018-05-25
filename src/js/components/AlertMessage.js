@@ -8,10 +8,17 @@ class AlertMessage extends Component {
 
     }
 
+    onDismiss = () => {
+        let { hideAlert } = this.props;
+        hideAlert();
+    }
     renderMessage = (message, error) => {
         let color = error ? 'danger' : 'success';
         return (
-            <Alert className="api-alert" color={color}>
+            <Alert className="api-alert"
+                color={color}
+                isOpen={message ? true : false}
+                toggle={this.onDismiss} >
                 {message}
             </Alert>
         );
@@ -20,8 +27,6 @@ class AlertMessage extends Component {
         let { message, error } = this.props;
 
         return message ? this.renderMessage(message, error) : null;
-
-
     }
 }
 
