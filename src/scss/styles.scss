@@ -8,30 +8,41 @@
 @import "../font-awesome/scss/fa-solid.scss";
 @import "../font-awesome/scss/fa-regular.scss";
 
+.full-height-block {
+    @include media-breakpoint-up(md) {
+        max-height: 100vh;
+        overflow: auto;
+    }
+}
+
 .todo-item {
     position: relative;
     padding-right: 40px;
+
     .todo-actions {
         position: absolute;
         top: 0;
         right: 0;
         display: none;
     }
+
     @include hover-focus {
         .todo-actions {
             display: block;
         }
     }
+
+
     .todo-text {
         font-weight: bold;
     }
-    
+
     &.completed {
         .todo-text {
             text-decoration: line-through;
             color: $gray-500;
-        } 
-    } 
+        }
+    }
 }
 
 .loading-modal {
@@ -39,8 +50,8 @@
         background: transparent;
         border: 0;
     }
-    
 }
+
 .loading-backdrop {
     background-color: $white;
 }
@@ -52,6 +63,7 @@
     left: calc(50% - 250px);
     width: 500px;
     z-index: 1000;
+
     @include media-breakpoint-down(sm) {
         width: 90vw;
         left: calc(50% - 45vw);

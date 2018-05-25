@@ -43,7 +43,7 @@ class AddTodoForm extends Component {
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                    <Input placeholder={'Type Text'} value={text} onChange={(e) => this.onChangeInput('text', e.target.value)} />
+                    <Input type={'textarea'} placeholder={'Type Text'} value={text} onChange={(e) => this.onChangeInput('text', e.target.value)} />
                 </div>
                 <button className="btn btn-primary" type="submit">Add Todo</button>
             </form>

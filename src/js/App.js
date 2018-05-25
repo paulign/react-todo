@@ -10,12 +10,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container py-3">
+      <div className="container">
         <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6 full-height-block py-3">
             <TodoListContainer />
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 py-3">
             <AddTodoContainer />
           </div>
         </div>

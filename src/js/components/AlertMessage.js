@@ -17,7 +17,6 @@ class AlertMessage extends Component {
         return (
             <Alert className="api-alert"
                 color={color}
-                isOpen={message ? true : false}
                 toggle={this.onDismiss} >
                 {message}
             </Alert>
