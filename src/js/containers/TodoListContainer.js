@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TodoList from '../components/TodoList';
 import Loading from '../components/Loading';
-import { getAllTodosRequest, updateTodoRequest, deleteTodoRequest  } from '../actions';
+import AlertMessage from '../components/AlertMessage';
+import { getAllTodosRequest, updateTodoRequest, deleteTodoRequest, showAlertWithTimeout  } from '../actions';
 
 class TodoListContainer extends Component {
     
@@ -11,10 +12,11 @@ class TodoListContainer extends Component {
     }
 
     render() {
-        let { todos } = this.props;
+        let { todos, alert } = this.props;
 
         return (
             <div>
+                <AlertMessage {...alert} />
                 <TodoList {...this.props} />
                 <Loading isLoading={todos.isFetching}/>
             </div>
@@ -24,7 +26,8 @@ class TodoListContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        todos: state.todos
+        todos: state.todos,
+        alert: state.alert
     }
 }
 
@@ -33,6 +36,7 @@ const mapDispatchToProps = (dispatch) => {
         getAllTodos: () => dispatch(getAllTodosRequest ()),
         updateTodo: (todo) => dispatch(updateTodoRequest (todo)),
         deleteTodo: (todo) => dispatch(deleteTodoRequest (todo)),
+        showAlert: (message, error) => dispatch(showAlertWithTimeout (message, error))
     };
 };
 

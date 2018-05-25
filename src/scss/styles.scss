@@ -44,3 +44,16 @@
 .loading-backdrop {
     background-color: $white;
 }
+
+.api-alert {
+    position: fixed;
+    bottom: 15px;
+    margin: auto;
+    left: calc(50% - 250px);
+    width: 500px;
+    z-index: 1000;
+    @include media-breakpoint-down(sm) {
+        width: 90vw;
+        left: calc(50% - 45vw);
+    }
+}

@@ -7,6 +7,9 @@ export const RECEIVE_ERROR = 'RECEIVE_ERROR';
 export const ADD_TODO_REQUEST = 'ADD_TODO_REQUEST';
 export const UPDATE_TODO_REQUEST = 'UPDATE_TODO_REQUEST';
 export const DELETE_TODO_REQUEST = 'DELETE_TODO_REQUEST';
+export const SHOW_SUCCEESS_ALERT = 'SHOW_SUCCEESS_ALERT';
+export const SHOW_ERROR_ALERT = 'SHOW_ERROR_ALERT';
+export const HIDE_ALERT = 'HIDE_ALERT';
 
 export const getAllTodos = () => {
   return {
@@ -75,9 +78,11 @@ export const addTodoRequest = (todo) => {
       console.log(data);
       let { todos } = getState();
       todos.items.push(data);
+      dispatch(showAlertWithTimeout('Todo was successfully added!'));
       return dispatch(receiveTodos(todos.items));
 
     } catch (error) {
+      dispatch(showAlertWithTimeout(error.message));
       return dispatch(receiveError(error.message));
     }
   }
@@ -122,5 +127,37 @@ export const deleteTodoRequest = (todo) => {
     } catch (error) {
       return dispatch(receiveError(error.message));
     }
+  }
+}
+
+export const showAlert = (message, error = false) => {
+  return {
+    type: error ? SHOW_ERROR_ALERT : SHOW_SUCCEESS_ALERT,
+    message,
+    error
+  }
+}
+
+export const showAlertWithTimeout = (message, error) => {
+  return async (dispatch, getState) => {
+    try {
+      console.log(message, error);
+      dispatch(showAlert(message, error));
+      const timeout = () => {
+        if (getState().alert.message) {
+          return dispatch(hideAlert());
+        }
+      }
+      setTimeout(timeout, 5000);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export const hideAlert = () => {
+  return {
+    type: HIDE_ALERT
   }
 }
