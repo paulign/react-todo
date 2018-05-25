@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, ModalBody } from 'reactstrap';
-import spinner from '../../img/Spin-1s-63px.svg';
+import spinner from '../../img/loading-spinner.svg';
 
 class Loading extends Component {
 
