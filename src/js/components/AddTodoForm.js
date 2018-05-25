@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Input } from 'reactstrap';
+import { Form, Input, Label, FormGroup, Button } from 'reactstrap';
 
 
 class AddTodoForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: ""
+            text: "",
+            completed: false
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -14,18 +15,19 @@ class AddTodoForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        let { text } = this.state;
+        let { text, completed } = this.state;
 
         if (text) {
             let { addTodo } = this.props;
             let todo = {
                 text: text,
-                completed: false,
+                completed: completed,
                 created: new Date(Date.now())
             };
             addTodo(todo);
             this.setState({
-                text: ''
+                text: '',
+                completed: false
             });
         }
 
@@ -38,15 +40,21 @@ class AddTodoForm extends Component {
     }
 
     render() {
-        let {text} = this.state;
+        let { text, completed } = this.state;
 
         return (
-            <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
+            <Form onSubmit={this.handleSubmit}>
+                <FormGroup>
                     <Input type={'textarea'} placeholder={'Type Text'} value={text} onChange={(e) => this.onChangeInput('text', e.target.value)} />
-                </div>
-                <button className="btn btn-primary" type="submit">Add Todo</button>
-            </form>
+                </FormGroup>
+                <FormGroup check className="mb-3">
+                    <Label check>
+                        <Input type="checkbox" checked={completed} onChange={(e) => this.onChangeInput('completed', e.target.checked)} />{' '}
+                        Completed
+                    </Label>
+                </FormGroup>
+                <Button color="primary" type="submit">Add Todo</Button>
+            </Form>
         );
     }
 }
