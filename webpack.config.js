@@ -4,6 +4,7 @@ const argv = require('yargs').argv;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const isDevelopment = argv.mode === 'development';
 const isProduction = !isDevelopment;
@@ -156,8 +157,9 @@ const config = {
         extractSass,
         new HtmlWebpackPlugin({
             template: "./src/index.html",
-            filename: "index.html"
+            filename: "index.html",
         }),
+        new FaviconsWebpackPlugin(path.resolve(__dirname, "src/img/logo.svg")),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
@@ -165,7 +167,7 @@ const config = {
             'Tether': 'tether',
             'window.Tether': 'tether',
             Popper: ['popper.js', 'default'],
-        })
+        })   
     ],
     optimization: isProduction ? {
         minimizer: [
