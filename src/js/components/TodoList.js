@@ -20,9 +20,9 @@ class TodoList extends Component {
         let { todos, updateTodo, deleteTodo } = this.props;
 
         return (
-            <div className="row justify-content-center">
+            <div className="row justify-content-center py-3">
                 <div className="col-md-8">
-                    <ul>
+                    <ul className="list-unstyled px-0">
                         {todos ? todos.items.map(todo =>
                             <Todo
                                 key={todo.id}

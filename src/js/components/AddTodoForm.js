@@ -13,8 +13,7 @@ class AddTodoForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault();
+    handleSubmit = (close) => {
         let { text, completed } = this.state;
 
         if (text) {
@@ -29,6 +28,10 @@ class AddTodoForm extends Component {
                 text: '',
                 completed: false
             });
+
+            if(close) {
+                this.props.history.push('/');
+            }
         }
 
     }
@@ -45,7 +48,7 @@ class AddTodoForm extends Component {
         return (
             <div className="row justify-content-center py-3">
                 <div className="col-md-8">
-                    <Form onSubmit={this.handleSubmit}>
+                    <Form>
                         <FormGroup>
                             <Input type={'textarea'} placeholder={'Type Text'} value={text} onChange={(e) => this.onChangeInput('text', e.target.value)} />
                         </FormGroup>
@@ -53,9 +56,10 @@ class AddTodoForm extends Component {
                             <Label check>
                                 <Input type="checkbox" checked={completed} onChange={(e) => this.onChangeInput('completed', e.target.checked)} />{' '}
                                 Completed
-                    </Label>
+                            </Label>
                         </FormGroup>
-                        <Button color="primary" type="submit">Add Todo</Button>
+                        <Button color="primary" onClick={() => this.handleSubmit(false)} className="mr-3" type="button">Add</Button>
+                        <Button color="primary" onClick={() => this.handleSubmit(true)} className="mr-3" type="button">Add and Close</Button>
                     </Form>
                 </div>
             </div>

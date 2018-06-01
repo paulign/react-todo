@@ -82,7 +82,7 @@ class Todo extends Component {
         let completedClass = completed ? 'completed' : '';
         let toggleClass = completed ? 'text-success' : 'text-warning';
         return (
-            <li className={`list-unstyled d-flex mb-3 todo-item ${completedClass}`}>
+            <li className={`d-flex mb-3 todo-item ${completedClass}`}>
                 <a href="" className={`${toggleClass}`} onClick={this.toggleComplete}>
                     <i className={`${toggleIconClass} fa-check-circle mr-3 fa-2x`} />
                 </a>
