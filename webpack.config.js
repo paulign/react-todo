@@ -20,7 +20,7 @@ const cssLoader = [
     {
         loader: "css-loader",
         options: {
-            sourceMap: true,
+            sourceMap: isDevelopment,
             minimize: isProduction,
         }
     },
@@ -38,7 +38,7 @@ const sassLoader = [
     {
         loader: "css-loader",
         options: {
-            sourceMap: true,
+            sourceMap: isDevelopment,
             minimize: isProduction,
         }
     },
@@ -55,7 +55,7 @@ const sassLoader = [
     {
         loader: "sass-loader",
         options: {
-            sourceMap: true
+            sourceMap: isDevelopment
         }
     }
 ];
@@ -172,7 +172,7 @@ const config = {
     optimization: isProduction ? {
         minimizer: [
             new UglifyJsPlugin({
-                sourceMap: true,
+                sourceMap: false,
                 uglifyOptions: {
                     compress: {
                         warnings: false,

@@ -5,6 +5,10 @@ import { addTodoRequest } from '../actions';
 
 class AddTodoContainer extends Component {
 
+    componentDidMount = () => {
+        document.title = 'Add todo';
+    }
+
     render() {
         return (
             <AddTodoForm {...this.props} />

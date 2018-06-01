@@ -5,6 +5,10 @@ import { getAllTodosRequest, updateTodoRequest, deleteTodoRequest, showAlertWith
 
 class TodoListContainer extends Component {
 
+    componentDidMount = () => {
+        document.title = 'Todolist';
+    }
+
     render() {
         return (
             <TodoList {...this.props} />
