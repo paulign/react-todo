@@ -9,7 +9,7 @@ class TodoList extends Component {
     }
 
     renderNoItems = () => {
-        let {todos} = this.props;
+        let { todos } = this.props;
         let text = todos.isFetching ? 'Loading...' : 'No items yet...';
         return (
             <h4 className="text-center">{text}</h4>
@@ -20,16 +20,20 @@ class TodoList extends Component {
         let { todos, updateTodo, deleteTodo } = this.props;
 
         return (
-            <ul>
-                {todos ? todos.items.map(todo =>
-                    <Todo
-                        key={todo.id}
-                        todo={todo}
-                        updateTodo={updateTodo}
-                        deleteTodo={deleteTodo}
-                    />
-                ) : null}
-            </ul>
+            <div className="row justify-content-center">
+                <div className="col-md-8">
+                    <ul>
+                        {todos ? todos.items.map(todo =>
+                            <Todo
+                                key={todo.id}
+                                todo={todo}
+                                updateTodo={updateTodo}
+                                deleteTodo={deleteTodo}
+                            />
+                        ) : null}
+                    </ul>
+                </div>
+            </div>
         );
     }
 
@@ -37,7 +41,7 @@ class TodoList extends Component {
         let { todos } = this.props;
 
         return todos && todos.items.length ? this.renderTodos() : this.renderNoItems();
-        
+
     }
 }
 

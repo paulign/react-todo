@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AddTodoForm from '../components/AddTodoForm';
-import { addTodoRequest  } from '../actions';
+import { addTodoRequest } from '../actions';
 
 class AddTodoContainer extends Component {
 

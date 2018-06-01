@@ -43,18 +43,22 @@ class AddTodoForm extends Component {
         let { text, completed } = this.state;
 
         return (
-            <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
-                    <Input type={'textarea'} placeholder={'Type Text'} value={text} onChange={(e) => this.onChangeInput('text', e.target.value)} />
-                </FormGroup>
-                <FormGroup check className="mb-3">
-                    <Label check>
-                        <Input type="checkbox" checked={completed} onChange={(e) => this.onChangeInput('completed', e.target.checked)} />{' '}
-                        Completed
+            <div className="row justify-content-center py-3">
+                <div className="col-md-8">
+                    <Form onSubmit={this.handleSubmit}>
+                        <FormGroup>
+                            <Input type={'textarea'} placeholder={'Type Text'} value={text} onChange={(e) => this.onChangeInput('text', e.target.value)} />
+                        </FormGroup>
+                        <FormGroup check className="mb-3">
+                            <Label check>
+                                <Input type="checkbox" checked={completed} onChange={(e) => this.onChangeInput('completed', e.target.checked)} />{' '}
+                                Completed
                     </Label>
-                </FormGroup>
-                <Button color="primary" type="submit">Add Todo</Button>
-            </Form>
+                        </FormGroup>
+                        <Button color="primary" type="submit">Add Todo</Button>
+                    </Form>
+                </div>
+            </div>
         );
     }
 }

@@ -185,7 +185,8 @@ const config = {
         contentBase: distPath,
         port: 9000,
         compress: true,
-        open: true
+        open: true,
+        historyApiFallback: true
     }
 };
 
